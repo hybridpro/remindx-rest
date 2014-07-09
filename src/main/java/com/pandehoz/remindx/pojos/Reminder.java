@@ -29,6 +29,66 @@ public class Reminder {
 	
 	private boolean sendtogroup;
 	
+	private boolean performed;
+	
+	private boolean accepted;
+	
+	private boolean expired;
+	
+	private boolean reachedourserver;
+	
+	private boolean reachedpushserver;
+	
+	private boolean reacheddevice;
+	
+	public boolean isPerformed() {
+		return performed;
+	}
+
+	public void setPerformed(boolean performed) {
+		this.performed = performed;
+	}
+
+	public boolean isAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
+	}
+
+	public boolean isExpired() {
+		return expired;
+	}
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
+
+	public boolean isReachedourserver() {
+		return reachedourserver;
+	}
+
+	public void setReachedourserver(boolean reachedourserver) {
+		this.reachedourserver = reachedourserver;
+	}
+
+	public boolean isReachedpushserver() {
+		return reachedpushserver;
+	}
+
+	public void setReachedpushserver(boolean reachedpushserver) {
+		this.reachedpushserver = reachedpushserver;
+	}
+
+	public boolean isReacheddevice() {
+		return reacheddevice;
+	}
+
+	public void setReacheddevice(boolean reacheddevice) {
+		this.reacheddevice = reacheddevice;
+	}
+
 	private boolean now;
 	
 	private String locationlong;

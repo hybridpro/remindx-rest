@@ -9,53 +9,63 @@ public class User {
 	@Id
 	private String userid;
 
-	private String firstName;
+	private String firstname;
 	
-	private String middleName;
+	private String middlename;
 	
-	private String lastName;
+	private String lastname;
 	
-	private String userDescription;
+	private String userdescription;
 	
-	private String phoneNumber;
+	private String phonenumber;
 
-	public String getFirstName() {
-		return firstName;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getMiddleName() {
-		return middleName;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getMiddlename() {
+		return middlename;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setMiddlename(String middlename) {
+		this.middlename = middlename;
 	}
 
-	public String getUserDescription() {
-		return userDescription;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setUserDescription(String userDescription) {
-		this.userDescription = userDescription;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getUserdescription() {
+		return userdescription;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setUserdescription(String userdescription) {
+		this.userdescription = userdescription;
 	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	
 }
