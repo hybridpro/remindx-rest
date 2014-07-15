@@ -1,4 +1,4 @@
-package com.pandehoz.remidx.reactor;
+package com.pandehoz.remidx.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

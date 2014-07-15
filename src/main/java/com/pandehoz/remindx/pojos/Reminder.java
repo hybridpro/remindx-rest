@@ -1,6 +1,7 @@
 package com.pandehoz.remindx.pojos;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -45,7 +46,32 @@ public class Reminder {
 	
 	private String senderregistrationid;
 	
-	private String sendeeregistrationid;
+	private List<String> sendeeswhoreceived;
+	
+	public List<String> getSendeeswhoreceived() {
+		return sendeeswhoreceived;
+	}
+
+	public void setSendeeswhoreceived(List<String> sendeeswhoreceived) {
+		this.sendeeswhoreceived = sendeeswhoreceived;
+	}
+
+	public List<String> getSendeeregistrationids() {
+		return sendeeregistrationids;
+	}
+
+	public void setSendeeregistrationids(List<String> sendeeregistrationids) {
+		this.sendeeregistrationids = sendeeregistrationids;
+	}
+
+	private List<String> sendeeregistrationids;
+	
+	private boolean now;
+	
+	private String locationlong;
+	
+	private String locationlat;
+	
 	public String getSenderdevice() {
 		return senderdevice;
 	}
@@ -68,14 +94,6 @@ public class Reminder {
 
 	public void setSenderregistrationid(String senderregistrationid) {
 		this.senderregistrationid = senderregistrationid;
-	}
-
-	public String getSendeeregistrationid() {
-		return sendeeregistrationid;
-	}
-
-	public void setSendeeregistrationid(String sendeeregistrationid) {
-		this.sendeeregistrationid = sendeeregistrationid;
 	}
 
 	public boolean isPerformed() {
@@ -125,12 +143,6 @@ public class Reminder {
 	public void setReacheddevice(boolean reacheddevice) {
 		this.reacheddevice = reacheddevice;
 	}
-
-	private boolean now;
-	
-	private String locationlong;
-	
-	private String locationlat;
 
 	public String getReminderid() {
 		return reminderid;

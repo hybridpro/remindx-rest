@@ -2,26 +2,28 @@ package com.pandehoz.remindx.pojos;
 
 public class GCMResult {
 
-	private String messageId;
-	private String canonicalRegistrationId;
-	private String errorCode;
+	private String messagee_id;
+	private String registration_id;
+	private String error;
 	
-	public String getMessageId() {
-		return messageId;
+	public String getMessagee_id() {
+		return messagee_id;
 	}
-	public void setMessageId(String messageId) {
-		this.messageId = messageId;
+	public void setMessagee_id(String messagee_id) {
+		this.messagee_id = messagee_id;
 	}
-	public String getCanonicalRegistrationId() {
-		return canonicalRegistrationId;
+	public String getRegistration_id() {
+		return registration_id;
 	}
-	public void setCanonicalRegistrationId(String canonicalRegistrationId) {
-		this.canonicalRegistrationId = canonicalRegistrationId;
+	public void setRegistration_id(String registration_id) {
+		this.registration_id = registration_id;
 	}
-	public String getErrorCode() {
-		return errorCode;
+	public String getError() {
+		return error;
 	}
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
+	public void setError(String error) {
+		this.error = error;
 	}
+	
+	
 }

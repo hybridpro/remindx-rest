@@ -3,8 +3,11 @@ package com.pandehoz.remidx.ws;
 
 import static reactor.event.selector.Selectors.$;
 
+import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,13 +18,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
-import com.pandehoz.remidx.reactor.ReactorPublisher;
-import com.pandehoz.remidx.reactor.ReactorReceiver;
+import com.pandehoz.remindx.pojos.Reminder;
 
 import reactor.core.Environment;
 import reactor.core.Reactor;
 import reactor.core.spec.Reactors;
+import reactor.event.Event;
 import reactor.spring.context.config.EnableReactor;
 
 @Configuration
@@ -32,10 +37,21 @@ import reactor.spring.context.config.EnableReactor;
 @EnableReactor
 public class MainApplication{
     
+	@Autowired
+	private ReactorReceiver receiver;
+
+    @Bean
+    public CountDownLatch latch(Integer numberOfJokes) {
+        return new CountDownLatch(numberOfJokes);
+    }
+    
 	@Bean
-	  public Reactor rootReactor(Environment env) {
-	    // implicit Environment is injected into bean def method
-	    return Reactors.reactor().env(env).get();
+	  public Reactor reactor(Environment env) {
+		Logger log = LoggerFactory.getLogger("reactor");
+		Reactor r = Reactors.reactor(env);
+	    
+	    r.on($("reminder"), receiver);
+	    return r;
 	  }
 	
 	public static void main(String[] args) {

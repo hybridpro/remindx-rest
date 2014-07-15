@@ -12,4 +12,5 @@ import com.pandehoz.remindx.pojos.Reminder;
 public interface ReminderRepository extends MongoRepository<Reminder, String> {
 
 	List<Reminder> findBySendee(@Param("sendee") String sendee);
+	
 }

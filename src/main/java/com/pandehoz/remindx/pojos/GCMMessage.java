@@ -1,5 +1,6 @@
 package com.pandehoz.remindx.pojos;
 
+import java.util.List;
 import java.util.Map;
 
 public class GCMMessage {
@@ -12,7 +13,15 @@ public class GCMMessage {
 	  private  Boolean dryRun;
 	  private  String restrictedPackageName;
 	  
-	  public String getCollapseKey() {
+	  private List<String> registration_ids;
+	  
+	  public List<String> getRegistration_ids() {
+		return registration_ids;
+	}
+	public void setRegistration_ids(List<String> registration_ids) {
+		this.registration_ids = registration_ids;
+	}
+	public String getCollapseKey() {
 		return collapseKey;
 	}
 	public void setCollapseKey(String collapseKey) {
