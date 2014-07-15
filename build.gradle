@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url "http://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/libs-snapshot" }
         mavenLocal()
         mavenCentral()
     }
@@ -24,6 +25,7 @@ repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/libs-release" }
     maven { url "http://m2.neo4j.org" }
+    maven { url "http://repo.spring.io/libs-snapshot" }
 }
 
 dependencies {
@@ -31,6 +33,7 @@ dependencies {
     compile("org.springframework.data:spring-data-mongodb")
     compile("org.springframework.data:spring-data-rest-webmvc")
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.projectreactor:reactor-spring:1.0.0.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-actuator") 
     compile("org.yaml:snakeyaml:1.8")
     testCompile("junit:junit")

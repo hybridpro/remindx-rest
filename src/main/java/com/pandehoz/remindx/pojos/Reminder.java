@@ -19,7 +19,7 @@ public class Reminder {
 	
 	private String text;
 	
-	private String requestingdevice;
+	private String senderdevice;
 	
 	private Date remindfrom;
 	
@@ -41,6 +41,43 @@ public class Reminder {
 	
 	private boolean reacheddevice;
 	
+	private String sendeeDevice;
+	
+	private String senderregistrationid;
+	
+	private String sendeeregistrationid;
+	public String getSenderdevice() {
+		return senderdevice;
+	}
+
+	public void setSenderdevice(String senderdevice) {
+		this.senderdevice = senderdevice;
+	}
+
+	public String getSendeeDevice() {
+		return sendeeDevice;
+	}
+
+	public void setSendeeDevice(String sendeeDevice) {
+		this.sendeeDevice = sendeeDevice;
+	}
+
+	public String getSenderregistrationid() {
+		return senderregistrationid;
+	}
+
+	public void setSenderregistrationid(String senderregistrationid) {
+		this.senderregistrationid = senderregistrationid;
+	}
+
+	public String getSendeeregistrationid() {
+		return sendeeregistrationid;
+	}
+
+	public void setSendeeregistrationid(String sendeeregistrationid) {
+		this.sendeeregistrationid = sendeeregistrationid;
+	}
+
 	public boolean isPerformed() {
 		return performed;
 	}
@@ -134,14 +171,6 @@ public class Reminder {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public String getRequestingdevice() {
-		return requestingdevice;
-	}
-
-	public void setRequestingdevice(String requestingdevice) {
-		this.requestingdevice = requestingdevice;
 	}
 
 	public Date getRemindfrom() {
