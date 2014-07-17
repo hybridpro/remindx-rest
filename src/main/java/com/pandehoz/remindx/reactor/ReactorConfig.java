@@ -1,4 +1,4 @@
-package com.pandehoz.remidx.reactor;
+package com.pandehoz.remindx.reactor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

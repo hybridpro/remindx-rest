@@ -17,7 +17,25 @@ public class User {
 	
 	private String userdescription;
 	
-	private String phonenumber;
+	private String registrationid;
+	
+	private String deviceType;
+
+	public String getDeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(String deviceType) {
+		this.deviceType = deviceType;
+	}
+
+	public String getRegistrationid() {
+		return registrationid;
+	}
+
+	public void setRegistrationid(String registrationid) {
+		this.registrationid = registrationid;
+	}
 
 	public String getUserid() {
 		return userid;
@@ -57,14 +75,6 @@ public class User {
 
 	public void setUserdescription(String userdescription) {
 		this.userdescription = userdescription;
-	}
-
-	public String getPhonenumber() {
-		return phonenumber;
-	}
-
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
 	}
 
 	

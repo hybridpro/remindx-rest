@@ -1,6 +1,6 @@
-package com.pandehoz.remidx.ws;
+package com.pandehoz.remindx.ws;
 
-import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +14,11 @@ import reactor.event.Event;
 
 import com.pandehoz.remindx.pojos.Reminder;
 
-@Controller
-@RequestMapping("/remindx/v1.0")
+//@Controller
+//@RequestMapping("/remindx/v1.0")*/
 public class RemindxController {
 
-	private final Reactor          reactor;
+	/*private final Reactor          reactor;
 	
 	@Autowired
 	private ReminderRepository	   reminders;
@@ -29,9 +29,10 @@ public class RemindxController {
 	}
 	
     @RequestMapping(method=RequestMethod.POST, value="/addReminder")
-    public void addReminder(@RequestBody Reminder reminder ) {   	
-    	reminders.save(reminder);
+    public Reminder addReminder(@RequestBody Reminder reminder ) {   	
+    	Reminder insertedReminder = reminders.save(reminder);
     	reactor.notify("reminder", Event.wrap(reminder));
-    }
+    	return insertedReminder;
+    }*/
 
 }

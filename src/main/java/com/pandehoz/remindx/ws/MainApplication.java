@@ -1,5 +1,5 @@
 
-package com.pandehoz.remidx.ws;
+package com.pandehoz.remindx.ws;
 
 import static reactor.event.selector.Selectors.$;
 
@@ -31,7 +31,7 @@ import reactor.spring.context.config.EnableReactor;
 
 @Configuration
 @EnableMongoRepositories
-@Import(RepositoryRestMvcConfiguration.class)
+@Import(RepositoryConfig.class)
 @EnableAutoConfiguration
 @ComponentScan
 @EnableReactor
@@ -39,18 +39,13 @@ public class MainApplication{
     
 	@Autowired
 	private ReactorReceiver receiver;
-
-    @Bean
-    public CountDownLatch latch(Integer numberOfJokes) {
-        return new CountDownLatch(numberOfJokes);
-    }
-    
+	
 	@Bean
 	  public Reactor reactor(Environment env) {
-		Logger log = LoggerFactory.getLogger("reactor");
 		Reactor r = Reactors.reactor(env);
 	    
 	    r.on($("reminder"), receiver);
+	    r.on($("reminderid"), receiver);
 	    return r;
 	  }
 	

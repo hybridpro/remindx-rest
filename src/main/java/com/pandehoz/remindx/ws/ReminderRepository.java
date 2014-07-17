@@ -1,4 +1,4 @@
-package com.pandehoz.remidx.ws;
+package com.pandehoz.remindx.ws;
 
 import java.util.List;
 

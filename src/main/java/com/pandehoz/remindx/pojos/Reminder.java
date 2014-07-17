@@ -56,15 +56,15 @@ public class Reminder {
 		this.sendeeswhoreceived = sendeeswhoreceived;
 	}
 
-	public List<String> getSendeeregistrationids() {
-		return sendeeregistrationids;
+	public List<String> getSendeeids() {
+		return sendeeids;
 	}
 
-	public void setSendeeregistrationids(List<String> sendeeregistrationids) {
-		this.sendeeregistrationids = sendeeregistrationids;
+	public void setSendeeids(List<String> sendeeids) {
+		this.sendeeids = sendeeids;
 	}
 
-	private List<String> sendeeregistrationids;
+	private List<String> sendeeids;
 	
 	private boolean now;
 	

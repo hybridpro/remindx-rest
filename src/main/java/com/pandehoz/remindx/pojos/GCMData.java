@@ -2,6 +2,9 @@ package com.pandehoz.remindx.pojos;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class GCMData {
 
 	private String reminderId;
@@ -17,6 +20,16 @@ public class GCMData {
 	private String text;
 	
 	private boolean now;
+	
+	private String sender;
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
 
 	public String getReminderId() {
 		return reminderId;

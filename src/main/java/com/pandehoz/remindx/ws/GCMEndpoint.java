@@ -1,4 +1,4 @@
-package com.pandehoz.remidx.ws;
+package com.pandehoz.remindx.ws;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,10 +10,12 @@ import org.apache.log4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.pandehoz.remindx.pojos.GCMMessage;
@@ -22,12 +24,12 @@ import com.pandehoz.remindx.pojos.GCMResult;
 import com.pandehoz.remindx.pojos.Reminder;
 import com.pandehoz.remindx.constants.GCMConstants;
 
+@Component
 public class GCMEndpoint {
 
 	protected static final String UTF8 = "UTF-8";
-	
-	@Autowired
-	RestTemplate restTemplate;
+
+	private RestTemplate restTemplate = new RestTemplate();
 	
 	@Autowired
 	private ReminderRepository	   reminders;
@@ -47,22 +49,7 @@ public class GCMEndpoint {
 
 
 	  /**
-	   * Sends a message to one device, retrying in case of unavailability.
-	   *
-	   * <p>
-	   * <strong>Note: </strong> this method uses exponential back-off to retry in
-	   * case of service unavailability and hence could block the calling thread
-	   * for many seconds.
-	   *
-	   * @param message message to be sent, including the device's registration id.
-	   * @param registrationId device where the message will be sent.
-	   * @param retries number of retries in case of service unavailability errors.
-	   *
-	   * @return result of the request (see its javadoc for more details).
-	   *
-	   * @throws IllegalArgumentException if registrationId is {@literal null}.
-	   * @throws InvalidRequestException if GCM didn't returned a 200 or 5xx status.
-	   * @throws IOException if message could not be sent.
+	   * Sends a message to one/multiple device(s), retrying in case of unavailability.
 	   */
 	  public boolean send(GCMMessage message, int retries){
 	    int attempt = 0;
@@ -90,13 +77,7 @@ public class GCMEndpoint {
 
 	  /**
 	   * Sends a message without retrying in case of service unavailability. See
-	   * {@link #send(Message, String, int)} for more info.
-	   *
-	   * @return result of the post, or {@literal null} if the GCM service was
-	   *         unavailable or any network exception caused the request to fail.
-	   *
-	   * @throws InvalidRequestException if GCM didn't returned a 200 or 5xx status.
-	   * @throws IllegalArgumentException if registrationId is {@literal null}.
+	   * {@link #send(Message, int)} for more info.
 	   */
 	  public boolean sendNoRetry(GCMMessage message){
 		HttpHeaders headers = new HttpHeaders();
@@ -104,6 +85,10 @@ public class GCMEndpoint {
 	    headers.add("Authorization", "key=AIzaSyBar85ye7ZzYCQyJwGx0Q2kOO7ObgE1XUE");
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));  
 	    
+	    message.setDryRun(true);
+	    List<String> registration_ids = new ArrayList<String>();
+	    registration_ids.add("abc");
+	    message.setRegistration_ids(registration_ids);
 	    HttpEntity<GCMMessage> entity = new HttpEntity<GCMMessage>(message, headers);
 	    
 		ResponseEntity<GCMResponse> result = restTemplate.postForEntity(GCMConstants.GCM_SEND_ENDPOINT, entity, GCMResponse.class);  
@@ -119,7 +104,12 @@ public class GCMEndpoint {
 	    } else {
 	    	Reminder rem = reminders.findOne(message.getData().getReminderId());
 	    	List<String> oldReceived = rem.getSendeeswhoreceived();
-	    	List<String> newList = new ArrayList<String>(oldReceived);
+	    	List<String> newList;
+	    	
+	    	if(oldReceived == null)
+	    		newList = new ArrayList<String>();
+	    	else
+	    		newList = new ArrayList<String>(oldReceived);
 	    	
 	    	if(gcmresponse.getFailure() == 0 && gcmresponse.getCanonical_ids() == 0){
 	    		List<String> recentlySucceded = message.getRegistration_ids();		    	
@@ -132,8 +122,9 @@ public class GCMEndpoint {
 	    			}else{
 	    				String error_code = res.getError();
 	    				if(error_code.equalsIgnoreCase("Unavailable")) return false;
-	    		    	else if(error_code.equalsIgnoreCase("NotRegistered"))
-	    		    		return true; //TODO handle re-registration
+	    		    	else if(error_code.equalsIgnoreCase("NotRegistered")) return true; //TODO handle re-registration
+	    		    	else if(error_code.equalsIgnoreCase("InvalidRegistration")) return true;
+	    		    	else return false;
 	    			}
 	    		}
 	    	}
