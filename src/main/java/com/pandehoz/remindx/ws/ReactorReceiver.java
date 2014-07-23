@@ -59,7 +59,7 @@ public class ReactorReceiver implements Consumer<Event<String>> {
 		List<String> allSendees = reminder.getSendeeids();
 		List<String> allRegistrationIds = new ArrayList<String>();
 		
-		Map<String, String> sendeeRegidsMap = new HashMap<>();
+		Map<String, String> sendeeRegidsMap = new HashMap<String, String>();
 		for(String sendee : allSendees){
 			User user = users.findOne(sendee);
 			String regId = user.getRegistrationid();
