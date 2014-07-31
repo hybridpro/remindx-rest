@@ -27,6 +27,8 @@ import reactor.core.Environment;
 import reactor.core.Reactor;
 import reactor.core.spec.Reactors;
 import reactor.event.Event;
+import reactor.event.selector.ClassSelector;
+import reactor.function.Consumer;
 import reactor.spring.context.config.EnableReactor;
 
 @Configuration
@@ -38,7 +40,7 @@ import reactor.spring.context.config.EnableReactor;
 public class MainApplication{
     
 	@Autowired
-	private ReactorReceiver receiver;
+	private ReminderReceiver receiver;
 	
 	@Bean
 	  public Reactor reactor(Environment env) {
@@ -46,6 +48,13 @@ public class MainApplication{
 	    
 	    r.on($("reminder"), receiver);
 	    r.on($("reminderid"), receiver);
+	    r.on(new ClassSelector(NullPointerException.class), new Consumer<Event<NullPointerException>>() {
+
+			@Override
+			public void accept(Event<NullPointerException> t) {
+				System.out.println("Exception thrown : " + t.getData().getStackTrace());
+				
+			} });
 	    return r;
 	  }
 	

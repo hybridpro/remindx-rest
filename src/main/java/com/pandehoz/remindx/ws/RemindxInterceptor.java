@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pandehoz.remindx.pojos.PatchRequest;
 import com.pandehoz.remindx.pojos.Reminder;
+import com.pandehoz.remindx.pojos.SpecialPatchRequest;
 
 @Component
 public class RemindxInterceptor extends HandlerInterceptorAdapter {
@@ -80,7 +80,7 @@ public class RemindxInterceptor extends HandlerInterceptorAdapter {
 
 		    body = stringBuilder.toString();
 		    ObjectMapper mapper = new ObjectMapper();
-		    PatchRequest req = mapper.readValue(body, PatchRequest.class);
+		    SpecialPatchRequest req = mapper.readValue(body, SpecialPatchRequest.class);
 		    
 			return false;
 		}

@@ -6,4 +6,8 @@ spring:
         apikey: AIzaSyBar85ye7ZzYCQyJwGx0Q2kOO7ObgE1XUE
         senderid: 713009129202
         server: https://android.googleapis.com/gcm/send     
-            
+server:
+    port: 8090
+email:
+    host: localhost
+    port: 25   

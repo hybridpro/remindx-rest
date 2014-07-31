@@ -1,12 +1,14 @@
 package com.pandehoz.remindx.pojos;
 
-public class PatchRequest {
+import java.util.List;
+
+public class SpecialPatchRequest {
 
 	private String op;
 	
 	private String field;
 	
-	private String value;
+	private List<String> value;
 
 	public String getOp() {
 		return op;
@@ -24,11 +26,13 @@ public class PatchRequest {
 		this.field = field;
 	}
 
-	public String getValue() {
+	public List<String> getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(List<String> value) {
 		this.value = value;
 	}
+	
+	
 }

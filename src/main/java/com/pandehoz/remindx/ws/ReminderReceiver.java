@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import reactor.core.Reactor;
 import reactor.event.Event;
 import reactor.function.Consumer;
 
@@ -20,7 +21,7 @@ import com.pandehoz.remindx.pojos.User;
 
 @Service
 @ComponentScan(basePackages = {"com.pandehoz.remindx.pojos"})
-public class ReactorReceiver implements Consumer<Event<String>> {
+public class ReminderReceiver implements Consumer<Event<String>> {
 	
 	@Autowired
 	private ReminderRepository reminders;
@@ -38,35 +39,34 @@ public class ReactorReceiver implements Consumer<Event<String>> {
 	GCMMessage message;
 	
 	public void accept(Event<String> e){
-		
-		data = new GCMData();
-		message = new GCMMessage();
-		String reminderid = e.getData();
-		
-		Reminder reminder = reminders.findOne(reminderid);
-		
-		data.setReminderId(reminderid);
-		data.setSender(reminder.getSender());
-		data.setLocationLat(reminder.getLocationlat());
-		data.setLocationLong(reminder.getLocationlong());
-		data.setNow(reminder.isNow());
-		data.setRemindFrom(reminder.getRemindfrom());
-		data.setRemindTo(reminder.getRemindtill());
-		data.setText(reminder.getText());
-		
-		message.setData(data);
-		
-		List<String> allSendees = reminder.getSendeeids();
-		List<String> allRegistrationIds = new ArrayList<String>();
-		
-		Map<String, String> sendeeRegidsMap = new HashMap<String, String>();
-		for(String sendee : allSendees){
-			User user = users.findOne(sendee);
-			String regId = user.getRegistrationid();
-			allRegistrationIds.add(regId);		
-			sendeeRegidsMap.put(regId, sendee);
-		}
-		message.setRegistration_ids(allRegistrationIds);
+			data = new GCMData();
+			message = new GCMMessage();
+			String reminderid = e.getData();
+			
+			Reminder reminder = reminders.findOne(reminderid);
+			
+			data.setReminderId(reminderid);
+			data.setSender(reminder.getSender());
+			data.setLocationLat(reminder.getLocationlat());
+			data.setLocationLong(reminder.getLocationlong());
+			data.setNow(reminder.isNow());
+			data.setRemindFrom(reminder.getRemindfrom());
+			data.setRemindTo(reminder.getRemindtill());
+			data.setText(reminder.getText());
+			
+			message.setData(data);
+			
+			List<String> allSendees = reminder.getSendeeids();
+			List<String> allRegistrationIds = new ArrayList<String>();
+			
+			Map<String, String> sendeeRegidsMap = new HashMap<String, String>();
+			for(String sendee : allSendees){
+				User user = users.findOne(sendee);
+				String regId = user.getRegistrationid();
+				allRegistrationIds.add(regId);		
+				sendeeRegidsMap.put(regId, sendee);
+			}
+			message.setRegistration_ids(allRegistrationIds);
 		
 		endpoint.send(message, 5);
 	}

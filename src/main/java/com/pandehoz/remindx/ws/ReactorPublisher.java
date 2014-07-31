@@ -27,4 +27,8 @@ public class ReactorPublisher {
 	public void publishReminder(String reminderid){
 		reactor.notify("reminder", Event.wrap(reminderid));
 	}
+	
+	public void publishException(Throwable t){
+		reactor.notify(t.getClass(), Event.wrap(t));
+	}
 }
