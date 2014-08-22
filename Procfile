@@ -1,1 +1,1 @@
-web: ./build/install/remindx-rest/bin/remindx-rest
+web: ./build/install/remindx/bin/remindx
