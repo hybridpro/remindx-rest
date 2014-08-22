@@ -1,9 +1,14 @@
 spring:
     data:
         mongodb:
-            uri: mongodb://root:admin@localhost:27017/remindx     
+            # uri: mongodb://root:admin@localhost:27017/remindx 
+            uri: mongodb://admin:12345678@lennon.mongohq.com:10010/app27376084    
     android:
-    	apikey: AIzaSyBar85ye7ZzYCQyJwGx0Q2kOO7ObgE1XUE
-    	senderid: 713009129202
-    	server: https://android.googleapis.com/gcm/send     
-            
+        apikey: AIzaSyBar85ye7ZzYCQyJwGx0Q2kOO7ObgE1XUE
+        senderid: 713009129202
+        server: https://android.googleapis.com/gcm/send     
+server:
+    port: 8090
+email:
+    host: localhost
+    port: 25   
